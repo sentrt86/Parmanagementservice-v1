@@ -116,14 +116,35 @@ public class ParSqlQueries {
 	public static String getNextParSeqQuery                 =   " SELECT NEXTVAL('PAR_SEQ')";
 	public static String updateParMasterQuery               =   " UPDATE PAR_MSTR SET PAR_DESC_TXT = ?, PAR_RCVD_DT = ?, PAR_STTS = ? , INTNT_TO_FILL_IND = ? , INTNT_SENT_DT = ?,EMAIL_SENT = ?, PAR_CMMNT = ? WHERE PAR_NUM = ? ";
 	public static String UpdateIntentToFillQuery            =   " UPDATE PAR_MSTR SET INTNT_TO_FIL_IND = ? , INTNT_SENT_DT = ? WHERE PAR_ID = ?";
+	public static String UpdateEmailRecruiterbyParId        =   " UPDATE PAR_MSTR SET PAR_CMMNT = ? , EMAIL_SENT = ? WHERE PAR_ID = ?";
+	public static String UpdateEmailRecruiterbyParNum       =   " UPDATE PAR_MSTR SET PAR_CMMNT = ? , EMAIL_SENT = ? WHERE PAR_NUM = ?";
 
 // Par Relation Queries
 	
 	public static String createParRltnQuery                 =   " INSERT INTO PAR_RLTN (PAR_CD,ROLE_CD,SKILL_CD,AREA_CD,EXT_STAFF_CD,LOC_CD) VALUES(?,?,?,?,?,?)";
 	public static String updateParRltnQuery                 =   " UPDATE PAR_RLTN SET ROLE_CD = ? , AREA_CD = ?,SKILL_CD = ?, EXT_STAFF_CD = ? , LOC_CD= ? WHERE PAR_CD = ?";
+	public static String getParRltnQuery                    =   " SELECT ROLE_CD, LOC_CD, SKILL_CD,AREA_CD,EXT_STAFF_CD WHERE PAR_CD=?";
 
 // Par Allocation Queries
 	
-	public static String createParAllocationQuery           =   " INSERT INTO PAR_ALLOCATION(PAR_ALLOC_ID,PAR_CD,RECRUIT_CD,PRE_SCR_CD,CAND_CD,PRE_SCR_DT,PRE_SCR_CMNT_TXT,SUBMIT_IND,SUBMIT_DT,OFFER_RECVD_IND,EXPT_START_DT,ACTUAL_START_DT) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)_";
+	public static String createParAllocationQuery           =   " INSERT INTO PAR_ALLOCATION(PAR_ALLOC_ID,PAR_CD,RECRUIT_CD,PRE_SCR_CD,CAND_CD,PRE_SCR_DT,PRE_SCR_CMNT_TXT,SUBMIT_IND,SUBMIT_DT,OFFER_RECVD_IND,EXPT_START_DT,ACTUAL_START_DT) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static String getAllParAllocationQuery           =   " SELECT PAR_ALLOC_ID,PAR_CD,RECRUIT_CD,PRE_SCR_CD,CAND_CD,PRE_SCR_DT,PRE_SCR_CMNT_TXT,SUBMIT_IND,SUBMIT_DT,OFFER_RECVD_IND,EXPTD_START_DT,ACTUAL_START_DT FROM PAR_ALLOCATION WHERE PAR_CD=?";
+	public static String updateParAllocationQuery           =   " UPDATE PAR_ALLOCATION SET PRE_SCR_CD=?, PRE_SCR_DT=?, PRE_SCR_CMNT_TXT=?	 WHERE PAR_ALLOC_ID=?";
+	public static String deleteParAllocationQuery           =   " DELETE FROM PAR_ALLOCATION WHERE PAR_ALLOC_ID=?";
+	
+// Par Edit screen Queries
+	
+   public static String getParIdforParNo                   = "SELECT PAR_ID FROM PAR_MSTR WHERE PAR_NUM=?";
+   public static String getparNoforParId                   = "SELECT PAR_NUM FROM PAR_MSTR WHERE PAR_ID=?";
+   public static String updateParEntry					   = "UPDATE PAR_MSTR SET PAR_DESC_TXT = ?, PAR_RCVD_DT = ?, PAR_STTS = ? WHERE PAR_NUM = ?	";
+   public static String deleteParEntry                     = "DELETE FROM PAR_MSTR WHERE PAR_NUM=?";
+   public static String deleteParRltnforParId              = "DELETE FROM PAR_RLTN WHERE PAR_CD=?";
+   public static String getIntentDetailsforParId           = "SELECT INTNT_TO_FIL_IND,INTNT_SENT_DT FROM PAR_MSTR WHERE PAR_ID=?";
+   public static String getEmailRecruitersforParId         = "SELECT EMAIL_SENT,PAR_CMMNT FROM PAR_MSTR WHERE PAR_ID=?";
+   
+	
+	
+	
+	
 
 }

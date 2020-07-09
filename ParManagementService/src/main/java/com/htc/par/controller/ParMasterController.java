@@ -46,6 +46,8 @@ public class ParMasterController {
 	
 	@RequestMapping(value="/createParMaster",method=RequestMethod.POST)
 	public ResponseEntity<String> createParMaster(@RequestBody @Valid ParMaster parmaster) throws ResourceNotCreatedException{
+		System.out.println("Par master second controller");
+		
 		return new  ResponseEntity<String>(parMasterServiceImpl.createParMaster(parmaster),HttpStatus.OK);
 	}
 	
@@ -71,6 +73,13 @@ public class ParMasterController {
 	@RequestMapping(value="/updateIntentToFill",method=RequestMethod.POST)
 	public ResponseEntity<String> updateIntentToFill(@RequestBody @Valid ParMaster parmaster) throws ResourceNotCreatedException{
 		return new  ResponseEntity<String>(parMasterServiceImpl.updateIntentToFill(parmaster.getParId(),parmaster.getParNumber(),parmaster.getIntentToFill(),parmaster.getIntentSentDate()),HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/updateEmailRecruiters",method=RequestMethod.POST)
+	public ResponseEntity<Boolean> updateEmailRecruiters(@RequestBody @Valid ParMaster parmaster) throws ResourceNotCreatedException{
+		System.out.println("update email recruiters");
+		System.out.println(parmaster);
+		return new  ResponseEntity<Boolean>(parMasterServiceImpl.updateEmailRecruiters(parmaster.getParId(),parmaster.getParNumber(),parmaster.getParComment(),parmaster.getEmailSent()),HttpStatus.OK);
 	}
 
 }

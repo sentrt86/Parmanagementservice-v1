@@ -25,6 +25,7 @@ public class ParMasterDAOImpl implements IParMasterDAO{
 		Boolean parMasterCreated = false;
 		Object[] parms = new Object[] {parmaster.getParId(),parmaster.getParNumber(),parmaster.getParDescriptionText(),LocalDate.parse(parmaster.getParReceivedDate()),parmaster.getParStatus()};
 		int[] parmsType = new int[] {Types.INTEGER,Types.CHAR,Types.CHAR,Types.DATE,Types.CHAR};
+		System.out.println("par master DAO impl");
 		int createParmasterCount = jdbcTemplate.update(ParSqlQueries.createParMasterQuery,parms,parmsType);
 		if (createParmasterCount > 0)
 		{
@@ -72,6 +73,31 @@ public class ParMasterDAOImpl implements IParMasterDAO{
 		int[] parmsType = new int[] {Types.BOOLEAN,Types.DATE,Types.INTEGER};
 		int createCount = jdbcTemplate.update(ParSqlQueries.UpdateIntentToFillQuery,parms,parmsType);
 		if(createCount > 0) {
+			parMasterUpdated = true;
+		}		
+		return parMasterUpdated;
+	}
+
+	@Override
+	public Boolean updateEmailRecruitersbyParId(int parId,String parComment, Boolean emailSent) {
+		Boolean parMasterUpdated = false;
+		Object[] parms = new Object[] {parComment,emailSent,parId};
+		int[] parmsType = new int[] {Types.CHAR,Types.BOOLEAN,Types.INTEGER};
+		int updateCount = jdbcTemplate.update(ParSqlQueries.UpdateEmailRecruiterbyParId,parms,parmsType);
+		if(updateCount > 0) {
+			parMasterUpdated = true;
+		}		
+		return parMasterUpdated;
+	}
+
+	@Override
+	public Boolean updateEmailRecruitersbyParNum(String parNum, String parComment, Boolean emailSent) {
+		Boolean parMasterUpdated = false;
+		Object[] parms = new Object[] {parComment,emailSent,parNum};
+		int[] parmsType = new int[] {Types.CHAR,Types.BOOLEAN,Types.CHAR};
+		System.out.println("update email recruiteres by par num");
+		int updateCount = jdbcTemplate.update(ParSqlQueries.UpdateEmailRecruiterbyParNum,parms,parmsType);
+		if(updateCount > 0) {
 			parMasterUpdated = true;
 		}		
 		return parMasterUpdated;

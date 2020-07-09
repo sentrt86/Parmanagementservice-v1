@@ -25,7 +25,11 @@ public class ParMasterServiceImpl  implements IParMasterService{
 	@Override
 	public String createParMaster(ParMaster parmaster)  throws ResourceNotCreatedException{
 		try {
+			System.out.println("par master second service");
+			System.out.println(parmaster);
+			System.out.println(parmaster.getParNumber());
 			List<ParMaster> parMasterList = parMasterDaoImpl.getParMasterByParNum(parmaster.getParNumber());
+			System.out.println(parMasterList.isEmpty());
 			if(parMasterList.isEmpty())
 			{
 				if(parMasterDaoImpl.createParMaster(parmaster))
@@ -87,6 +91,32 @@ public class ParMasterServiceImpl  implements IParMasterService{
 			throw new ResourceNotFoundException(String.format(ParConstants.dataNotFound + "for Par Master Number : %S",parNum));
 		}
 		return null;
+	}
+
+	@Override
+	public boolean updateEmailRecruiters(int parId, String parNum, String parComment, Boolean emailSent)
+			throws ResourceNotFoundException {
+		boolean EmailRecruiterUpdated=false;
+		try {
+			System.out.println("parID:"+parId);
+			System.out.println("parNum"+parNum);
+			System.out.println("parcomment"+parComment);
+			System.out.println("emailSent"+emailSent);
+		
+			 if(parId != 0)
+			 {
+				 EmailRecruiterUpdated = parMasterDaoImpl.updateEmailRecruitersbyParId(parId, parComment, emailSent);
+			 }
+			 else
+			 {
+				 System.out.println("update email recruiter by parnum");
+			 EmailRecruiterUpdated = parMasterDaoImpl.updateEmailRecruitersbyParNum(parNum, parComment, emailSent);
+			 }
+			 return EmailRecruiterUpdated;
+			
+		}catch(DataAccessException ex) { 
+			throw new ResourceNotFoundException(String.format(ParConstants.dataNotFound + "for Par Master ID : %S",parId));
+		}
 	}
 
 }

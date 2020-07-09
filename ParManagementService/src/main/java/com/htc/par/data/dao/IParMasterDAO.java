@@ -10,6 +10,8 @@ public interface IParMasterDAO {
 	Boolean createParMasterRltn(ParMaster parmaster);
 	List<ParMaster>  getParMasterByParNum(String parNum);
 	Boolean updateIntentToFill(int parId,Boolean intentToFill,String intentSentDate);
+	Boolean updateEmailRecruitersbyParId(int parId,String parComment, Boolean Emailsent);
+	Boolean updateEmailRecruitersbyParNum(String parNum,String parComment, Boolean Emailsent);
 	int getNextParSeqId();
 	
 

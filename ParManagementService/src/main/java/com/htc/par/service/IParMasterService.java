@@ -14,6 +14,7 @@ public interface IParMasterService {
 	
 	String createParMaster(ParMaster parmaster) throws ResourceNotCreatedException;
 	String updateIntentToFill(int parId,String parNum,Boolean intentToFill,String intentSentDate) throws ResourceNotFoundException;
+	boolean updateEmailRecruiters(int parId,String ParNum,String parComment,Boolean emailSent)throws ResourceNotFoundException;
 	Boolean createParMasterRltn(ParMaster parmaster) throws ResourceNotCreatedException;
 	List<ParMaster> getParMasterByParNum(String parNum) throws ResourceNotFoundException;
 	int getNextParSeqId() throws ResourceAccessException;
